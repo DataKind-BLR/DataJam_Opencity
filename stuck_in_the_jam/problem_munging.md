@@ -48,5 +48,5 @@ We pick  a common constituency for analysis under different heads:
 - Status of the projects - ?
 
 #### Structure of the dataset
-![](dataformat.png)                      
+![](data_format.png)                      
 
