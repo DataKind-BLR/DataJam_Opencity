@@ -16,3 +16,6 @@
  
 - The [pie.html](./pie.html) could be used to visualize the data in the form of a pie chart.
 
+Result for the above data:
+
+![Pie Chart](./pie.PNG)
