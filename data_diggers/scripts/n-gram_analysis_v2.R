@@ -3,8 +3,9 @@
 
 library(tm)
 library(RWeka)
+library(ggplot2)
 
-files <- list.files(path="../lad_csv_files", pattern="*.csv", full.names=T, recursive=FALSE)
+files <- list.files(path="/home/raghuramdr/Desktop/Datakind/DataJam/DataJam_Opencity/data_diggers/Data_Diggers/lad_csv_files", pattern="*.csv", full.names=T, recursive=FALSE)
 for (x in files) {
   t <- read.csv(x, stringsAsFactors = F) # load file
   docs <- VCorpus(VectorSource(t$Work.Name.Rough.Translation..English.))
@@ -37,8 +38,18 @@ for (x in files) {
   tdm <- TermDocumentMatrix(docs, control = list(tokenize = BigramTokenizer))
   freq = sort(rowSums(as.matrix(tdm)),decreasing = TRUE)
   
-  out_filename = paste('../res_files/', tools::file_path_sans_ext(basename(x)), '_out.csv', sep="")
-  write.csv(file=out_filename, x=data.frame(word=names(freq), freq=freq), row.names=FALSE)
+  freq.df = data.frame(word=names(freq), freq=freq)
+  head(freq.df, 20)
+  
+  ggplot(head(freq.df,25), aes(reorder(word,freq), freq)) +
+    geom_bar(stat = "identity") + coord_flip() +
+    xlab("Bigrams") + ylab("Frequency") +
+    ggtitle("Most frequent bigrams")
+  
+  break
+  
+  #out_filename = paste('../res_files/', tools::file_path_sans_ext(basename(x)), '_out.csv', sep="")
+  #write.csv(file=out_filename, x=data.frame(word=names(freq), freq=freq), row.names=FALSE)
   
   # apply function
   #out <- function(t)
