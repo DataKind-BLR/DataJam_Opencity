@@ -5,7 +5,7 @@ library(tm)
 library(RWeka)
 library(ggplot2)
 
-files <- list.files(path="/home/raghuramdr/Desktop/Datakind/DataJam/DataJam_Opencity/data_diggers/Data_Diggers/lad_csv_files", pattern="*.csv", full.names=T, recursive=FALSE)
+files <- list.files(path="../lad_csv_files", pattern="*.csv", full.names=T, recursive=FALSE)
 for (x in files) {
   t <- read.csv(x, stringsAsFactors = F) # load file
   docs <- VCorpus(VectorSource(t$Work.Name.Rough.Translation..English.))
